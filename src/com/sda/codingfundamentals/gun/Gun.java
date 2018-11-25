@@ -1,13 +1,21 @@
 package com.sda.codingfundamentals.gun;
 
+import java.util.Objects;
 import java.util.Stack;
 
 public class Gun {
 
+    private int serialNumber;
     private String name;
     private Stack<Integer> magazine;
 
     public Gun(String name, Stack<Integer> magazine) {
+        this.name = name;
+        this.magazine = magazine;
+    }
+
+    public Gun(int serialNumber, String name, Stack<Integer> magazine) {
+        this.serialNumber = serialNumber;
         this.name = name;
         this.magazine = magazine;
     }
@@ -46,5 +54,27 @@ public class Gun {
 
     public void setMagazine(Stack<Integer> magazine) {
         this.magazine = magazine;
+    }
+
+    public int getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(int serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Gun gun = (Gun) o;
+        return serialNumber == gun.serialNumber &&
+                Objects.equals(name, gun.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(serialNumber, name);
     }
 }
